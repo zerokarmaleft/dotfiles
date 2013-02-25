@@ -1,3 +1,5 @@
+source "$HOME/.bash_scripts/bashprompt_git_status.sh"
+
 alias ls="ls -Gp"
 alias grep="grep --color=auto"
 alias top="htop"
