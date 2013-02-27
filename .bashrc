@@ -7,3 +7,5 @@ alias ec="emacsclient -t"
 
 export TERM="screen-256color"
 export EDITOR="emacsclient -t"
+
+export PATH="$HOME/.bin:/usr/local/bin:$PATH"
