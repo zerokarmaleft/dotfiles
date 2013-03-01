@@ -1,0 +1,9 @@
+[ui]
+username = Edward Cho <echo@laureateinstitute.org>
+verbose = True
+
+[extensions]
+color =
+
+[color]
+mode = ansi
