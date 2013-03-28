@@ -17,6 +17,8 @@ alias grep="grep --color=auto"
 alias top="htop"
 alias ec="emacsclient -t"
 
+alias be="bundle exec"
+
 export TERM="screen-256color"
 export EDITOR="emacsclient -t"
 
