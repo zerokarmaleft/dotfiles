@@ -17,6 +17,7 @@
                       starter-kit-lisp
                       starter-kit-ruby
                       auto-complete
+                      exec-path-from-shell
                       yasnippet
                       zenburn-theme
 
@@ -59,6 +60,12 @@
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transform
       `((".*" ,temporary-file-directory t)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Path
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Color Theme
