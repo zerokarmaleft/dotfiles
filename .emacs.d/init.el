@@ -80,6 +80,14 @@
 (require 'zenburn-theme)
 
 ;; ===========================================================================
+;; Keybindings
+;; ===========================================================================
+(setq mac-command-modifier 'meta)
+(setq mac-option-modifier 'super)
+
+(global-set-key (kbd "C-c n") 'esk-cleanup-buffer)
+
+;; ===========================================================================
 ;; yasnippet
 ;; ===========================================================================
 (setq yas/load-directory "~/.emacs.d/vendor/snippets")
