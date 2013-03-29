@@ -20,4 +20,6 @@ alias be="bundle exec"
 export TERM="screen-256color"
 export EDITOR="emacsclient -t"
 
-export PATH="$HOME/.bin:/usr/local/bin:$PATH"
+export DISTUTILSPATH="/usr/local/share/python"
+export PATH="$HOME/.bin:/usr/local/bin:$DISTUTILSPATH:$PATH"
+
