@@ -22,13 +22,16 @@
                       zenburn-theme
 
                       ;; Ruby / Rails
+                      bundler
                       haml-mode
                       rinari
                       rspec-mode
                       ruby-mode
+                      ruby-tools
                       rvm
                       sass-mode
                       scss-mode
+                      yaml-mode
                       yari
 
                       ;; Clojure
@@ -46,6 +49,7 @@
                       feature-mode
 
                       ;; Miscellaneous
+                      cl-lib
                       graphviz-dot-mode
                       lorem-ipsum))
 
