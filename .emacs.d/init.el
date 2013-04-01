@@ -36,6 +36,7 @@
 
                       ;; Clojure
                       clojure-mode
+                      hl-sexp
                       nrepl
                       nrepl-ritz
                       ac-nrepl
@@ -92,6 +93,12 @@
 (global-set-key (kbd "C-c n") 'esk-cleanup-buffer)
 
 ;; ===========================================================================
+;; AutoComplete
+;; ===========================================================================
+(require 'auto-complete-config)
+(ac-config-default)
+
+;; ===========================================================================
 ;; yasnippet
 ;; ===========================================================================
 (setq yas/load-directory "~/.emacs.d/vendor/snippets")
@@ -112,6 +119,37 @@
   (setq slime-net-coding-system 'utf-8-unix)
   (setq inferior-lisp-program "clisp")
   (slime))
+
+;; ===========================================================================
+;; Clojure
+;; ===========================================================================
+(add-hook 'clojure-mode-hook 'paredit-mode)
+(add-hook 'clojure-mode-hook 'hl-sexp-mode)
+
+(setq nrepl-hide-special-buffers t)
+(add-hook 'nrepl-mode-hook 'paredit-mode)
+(add-hook 'nrepl-mode-hook 'hl-sexp-mode)
+(add-hook 'nrepl-mode-hook
+          (lambda ()
+            (font-lock-mode)
+            (clojure-mode-font-lock-setup)
+            (font-lock-mode)))
+(add-hook 'nrepl-interaction-mode-hook 'nrepl-turn-on-eldoc-mode)
+
+(add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
+(add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
+(eval-after-load "auto-complete"
+  '(add-to-list 'ac-modes 'nrepl-mode))
+(defun set-auto-complete-as-completion-at-point-function ()
+  (setq completion-at-point-functions '(auto-complete)))
+(add-hook 'auto-complete-mode-hook
+          'set-auto-complete-as-completion-at-point-function)
+(add-hook 'nrepl-mode-hook
+          'set-auto-complete-as-completion-at-point-function)
+(add-hook 'nrepl-interaction-mode-hook
+          'set-auto-complete-as-completion-at-point-function)
+(eval-after-load "nrepl"
+  '(define-key nrepl-interaction-mode-map (kbd "C-c C-d") 'ac-nrepl-popup-doc))
 
 ;; ===========================================================================
 ;; Ruby
