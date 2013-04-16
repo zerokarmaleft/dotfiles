@@ -23,3 +23,7 @@ export EDITOR="emacsclient -t"
 export DISTUTILSPATH="/usr/local/share/python"
 export PATH="$HOME/.bin:/usr/local/bin:$DISTUTILSPATH:$PATH"
 
+# load Python virtualenvwrapper
+export WORKON_HOME="$HOME/.virtualenv"
+[[ $OSTYPE == darwin* ]] && [[ -f $(brew --prefix)/share/python/virtualenvwrapper.sh ]] && . $(brew --prefix)/share/python/virtualenvwrapper.sh
+[[ $OSTYPE == linux-gnu ]] && [[ -f /usr/local/bin/virtualenvwrapper.sh ]] && . /usr/local/bin/virtualenvwrapper.sh
