@@ -12,7 +12,8 @@
 
 # Command Line aliases
 alias ln="ln -v"
-alias ls="ls --color=auto -Gp"
+[[ $OSTYPE == darwin* ]]   && alias ls="ls -Gp"
+[[ $OSTYPE == linux-gnu ]] && alias ls="ls --color=auto -p"
 alias grep="grep --color=auto"
 alias top="htop"
 alias ec="emacsclient -t"
