@@ -10,7 +10,7 @@
 # enable bash completion in interactive shells
 [[ $OSTYPE == darwin* ]] && [[ -f $(brew --prefix)/etc/bash_completion ]] && . $(brew --prefix)/etc/bash_completion
 
-alias ls="ls -Gp"
+alias ls="ls --color=auto -Gp"
 alias grep="grep --color=auto"
 alias top="htop"
 alias ec="emacsclient -t"
