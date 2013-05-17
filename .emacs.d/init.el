@@ -41,6 +41,9 @@
                       nrepl-ritz
                       ac-nrepl
 
+                      ;; Scala
+                      scala-mode2
+
                       ;; Python / Django
                       ein
                       jedi
@@ -52,15 +55,20 @@
                       ;; Miscellaneous
                       cl-lib
                       graphviz-dot-mode
-                      lorem-ipsum))
+                      lorem-ipsum
+                      pretty-mode))
 
 (dolist (package my-packages)
   (when (not (package-installed-p package))
     (package-install package)))
 
 ;; ===========================================================================
-;; Temporary file location
+;; Paths
 ;; ===========================================================================
+;; Vendor (non-ELPA/MELPA) packages
+(setq vendor-base-load-path (concat (getenv "HOME") "/.emacs.d/vendor"))
+
+;; temporary files
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transform
@@ -150,6 +158,15 @@
           'set-auto-complete-as-completion-at-point-function)
 (eval-after-load "nrepl"
   '(define-key nrepl-interaction-mode-map (kbd "C-c C-d") 'ac-nrepl-popup-doc))
+
+;; ===========================================================================
+;; Scala
+;; ===========================================================================
+(add-to-list 'load-path (concat vendor-base-load-path "/ensime/elisp"))
+(require 'ensime)
+
+(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+(add-hook 'scala-mode-hook 'pretty-mode)
 
 ;; ===========================================================================
 ;; Ruby
