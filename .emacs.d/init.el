@@ -201,3 +201,9 @@
 (add-hook 'python-mode-hook 'auto-complete-mode)
 (add-hook 'python-mode-hook 'jedi:setup)
 (add-hook 'python-mode-hook 'pretty-mode)
+
+;; ===========================================================================
+;; Haskell
+;; ===========================================================================
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(add-hook 'haskell-mode-hook 'pretty-mode)
