@@ -113,6 +113,7 @@
 ;; C / C++ / Objective C / Java / C#
 ;; ===========================================================================
 (add-hook 'c-mode-common-hook 'google-set-c-style)
+(add-hook 'c-mode-common-hook 'pretty-mode)
 
 ;; ===========================================================================
 ;; Common Lisp / SLIME
@@ -125,6 +126,8 @@
   (setq slime-net-coding-system 'utf-8-unix)
   (setq inferior-lisp-program "clisp")
   (slime))
+
+(add-hook 'lisp-mode-hook 'pretty-mode)
 
 ;; ===========================================================================
 ;; Clojure
@@ -179,6 +182,8 @@
 ;; TODO hack to suppress warning
 (defalias 'inf-ruby-keys 'inf-ruby-setup-keybindings)
 
+(add-hook 'ruby-mode-hook 'pretty-mode)
+
 ;; ===========================================================================
 ;; Python
 ;; ===========================================================================
@@ -195,3 +200,4 @@
 (autoload 'jedi:setup "jedi" nil t)
 (add-hook 'python-mode-hook 'auto-complete-mode)
 (add-hook 'python-mode-hook 'jedi:setup)
+(add-hook 'python-mode-hook 'pretty-mode)
