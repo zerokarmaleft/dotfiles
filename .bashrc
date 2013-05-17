@@ -23,6 +23,8 @@ alias be="bundle exec"
 
 export TERM="screen-256color"
 export EDITOR="emacsclient -t"
+export GIT_EDITOR="emacsclient -t"
+export HG_EDITOR="emacsclient -t"
 
 export CHROME_BIN=`which chromium-browser`
 export FIREFOX_BIN=`which firefox`
