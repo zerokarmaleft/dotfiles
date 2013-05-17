@@ -7,14 +7,18 @@
 # load Node.js Version Manager
 [[ -s $HOME/.nvm/nvm.sh ]] && source "$HOME/.nvm/nvm.sh"
 
-# enable bash completion in interactive shells
+# load bash completion in interactive shells
 [[ $OSTYPE == darwin* ]] && [[ -f $(brew --prefix)/etc/bash_completion ]] && . $(brew --prefix)/etc/bash_completion
 
-alias ls="ls --color=auto -Gp"
+# Command Line aliases
+alias ln="ln -v"
+[[ $OSTYPE == darwin* ]]   && alias ls="ls -Gp"
+[[ $OSTYPE == linux-gnu ]] && alias ls="ls --color=auto -p"
 alias grep="grep --color=auto"
 alias top="htop"
 alias ec="emacsclient -t"
 
+# Bundler
 alias be="bundle exec"
 
 export TERM="screen-256color"
