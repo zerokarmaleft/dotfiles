@@ -68,17 +68,15 @@
 ;; Vendor (non-ELPA/MELPA) packages
 (setq vendor-base-load-path (concat (getenv "HOME") "/.emacs.d/vendor"))
 
+;; inherit path modifications from the shell on Mac OS X
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
+
 ;; temporary files
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transform
       `((".*" ,temporary-file-directory t)))
-
-;; ===========================================================================
-;; Path
-;; ===========================================================================
-(when (memq window-system '(mac ns))
-  (exec-path-from-shell-initialize))
 
 ;; ===========================================================================
 ;; General Settings
