@@ -166,6 +166,10 @@
 (add-to-list 'load-path (concat vendor-base-load-path "/ensime/elisp"))
 (require 'ensime)
 
+(custom-set-variables
+ '(ensime-inf-cmd-template     '("sbt" "console" "-classpath" :classpath))
+ '(ensime-inf-default-cmd-line '("sbt" "console")))
+
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 (add-hook 'scala-mode-hook 'pretty-mode)
 
