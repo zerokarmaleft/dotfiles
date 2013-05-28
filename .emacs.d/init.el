@@ -44,6 +44,9 @@
                       ;; Scala
                       scala-mode2
 
+                      ;; Haskell
+                      haskell-mode
+
                       ;; Python / Django
                       ein
                       jedi
@@ -212,7 +215,8 @@
 ;; ===========================================================================
 ;; Haskell
 ;; ===========================================================================
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'pretty-mode)
 
 ;; ===========================================================================
