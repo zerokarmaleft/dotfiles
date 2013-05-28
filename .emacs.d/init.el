@@ -49,6 +49,9 @@
                       jedi
                       epc
 
+                      ;; R
+                      ess
+
                       ;; Cucumber
                       feature-mode
 
