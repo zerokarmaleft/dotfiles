@@ -169,15 +169,16 @@
 ;; ===========================================================================
 ;; Scala
 ;; ===========================================================================
-(add-to-list 'load-path (concat vendor-base-load-path "/ensime/elisp"))
-(require 'ensime)
+(let ((ensime-load-path (concat vendor-base-load-path "/ensime/elisp")))
+  (progn
+    (add-to-list 'load-path (concat vendor-base-load-path "/ensime/elisp"))
+    (when (file-exists-p (concat ensime-load-path "/ensime.el"))
+      (require 'ensime)
+      (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+      (add-hook 'scala-mode-hook 'pretty-mode))))
 
-(custom-set-variables
- '(ensime-inf-cmd-template     '("sbt" "console" "-classpath" :classpath))
- '(ensime-inf-default-cmd-line '("sbt" "console")))
-
-(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
-(add-hook 'scala-mode-hook 'pretty-mode)
+(setq ensime-inf-cmd-template     '("sbt" "console" "-classpath" :classpath)
+      ensime-inf-default-cmd-line '("sbt" "console"))
 
 ;; ===========================================================================
 ;; Ruby
