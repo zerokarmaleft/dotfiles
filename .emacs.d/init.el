@@ -169,10 +169,11 @@
 ;; ===========================================================================
 ;; Scala
 ;; ===========================================================================
-(let ((ensime-load-path (concat vendor-base-load-path "/ensime/elisp")))
+(let ((ensime-load-path (concat vendor-base-load-path "/ensime/elisp"))
+      (ensime-package   (concat ensime-load-path "/ensime.el")))
   (progn
-    (add-to-list 'load-path (concat vendor-base-load-path "/ensime/elisp"))
-    (when (file-exists-p (concat ensime-load-path "/ensime.el"))
+    (add-to-list 'load-path ensime-load-path)
+    (when (file-exists-p ensime-package)
       (require 'ensime)
       (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
       (add-hook 'scala-mode-hook 'pretty-mode))))
