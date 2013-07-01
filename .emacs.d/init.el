@@ -13,13 +13,17 @@
                       starter-kit
                       starter-kit-bindings
                       starter-kit-eshell
-                      starter-kit-js
                       starter-kit-lisp
                       starter-kit-ruby
                       auto-complete
                       exec-path-from-shell
                       yasnippet
                       zenburn-theme
+
+                      ;; JavaScript
+                      js2-mode
+                      js2-refactor
+                      ac-js2
 
                       ;; Ruby / Rails
                       bundler
@@ -120,6 +124,13 @@
 ;; ===========================================================================
 (add-hook 'c-mode-common-hook 'google-set-c-style)
 (add-hook 'c-mode-common-hook 'pretty-mode)
+
+;; ===========================================================================
+;; JavaScript
+;; ===========================================================================
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
+(customize-set-variable 'js2-basic-offset 2)
 
 ;; ===========================================================================
 ;; Common Lisp / SLIME
