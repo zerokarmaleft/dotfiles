@@ -24,13 +24,14 @@
                       js2-mode
                       js2-refactor
                       ac-js2
+                      coffee-mode
 
                       ;; Ruby / Rails
                       bundler
+                      enh-ruby-mode
                       haml-mode
                       rinari
                       rspec-mode
-                      ruby-mode
                       ruby-tools
                       rvm
                       sass-mode
