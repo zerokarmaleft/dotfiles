@@ -4,6 +4,8 @@ verbose = True
 
 [extensions]
 color =
+mq =
+rebase =
 
 [color]
 mode = ansi
