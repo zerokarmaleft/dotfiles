@@ -41,9 +41,9 @@
 
                       ;; Clojure
                       clojure-mode
+                      clojure-test-mode
                       hl-sexp
-                      nrepl
-                      nrepl-ritz
+                      cider
                       ac-nrepl
 
                       ;; Scala
@@ -152,33 +152,22 @@
 ;; ===========================================================================
 ;; Clojure
 ;; ===========================================================================
-(add-hook 'clojure-mode-hook 'paredit-mode)
-(add-hook 'clojure-mode-hook 'hl-sexp-mode)
-
 (setq nrepl-hide-special-buffers t)
-(add-hook 'nrepl-mode-hook 'paredit-mode)
-(add-hook 'nrepl-mode-hook 'hl-sexp-mode)
-(add-hook 'nrepl-mode-hook
+(setq cider-auto-select-error-buffer t)
+
+(dolist (mode '(paredit-mode hl-sexp-mode subword-mode))
+  (add-hook 'clojure-mode-hook mode)
+  (add-hook 'clojure-mode-hook (lambda () (hl-line-mode -1))))
+
+(dolist (hook '(cider-mode-hook cider-repl-mode-hook))
+  (dolist (mode '(paredit-mode hl-sexp-mode subword-mode))
+    (add-hook hook mode))
+  (add-hook hook (lambda () (hl-line-mode -1)))
+  (add-hook hook
           (lambda ()
             (font-lock-mode)
             (clojure-mode-font-lock-setup)
-            (font-lock-mode)))
-(add-hook 'nrepl-interaction-mode-hook 'nrepl-turn-on-eldoc-mode)
-
-(add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
-(add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
-(eval-after-load "auto-complete"
-  '(add-to-list 'ac-modes 'nrepl-mode))
-(defun set-auto-complete-as-completion-at-point-function ()
-  (setq completion-at-point-functions '(auto-complete)))
-(add-hook 'auto-complete-mode-hook
-          'set-auto-complete-as-completion-at-point-function)
-(add-hook 'nrepl-mode-hook
-          'set-auto-complete-as-completion-at-point-function)
-(add-hook 'nrepl-interaction-mode-hook
-          'set-auto-complete-as-completion-at-point-function)
-(eval-after-load "nrepl"
-  '(define-key nrepl-interaction-mode-map (kbd "C-c C-d") 'ac-nrepl-popup-doc))
+            (font-lock-mode))))
 
 ;; ===========================================================================
 ;; Scala
