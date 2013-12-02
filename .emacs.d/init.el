@@ -45,6 +45,7 @@
                       hl-sexp
                       cider
                       ac-nrepl
+                      slamhound
 
                       ;; Scala
                       scala-mode2
@@ -155,19 +156,19 @@
 (setq nrepl-hide-special-buffers t)
 (setq cider-auto-select-error-buffer t)
 
-(dolist (mode '(paredit-mode hl-sexp-mode subword-mode))
-  (add-hook 'clojure-mode-hook mode)
-  (add-hook 'clojure-mode-hook (lambda () (hl-line-mode -1))))
-
-(dolist (hook '(cider-mode-hook cider-repl-mode-hook))
-  (dolist (mode '(paredit-mode hl-sexp-mode subword-mode))
-    (add-hook hook mode))
-  (add-hook hook (lambda () (hl-line-mode -1)))
-  (add-hook hook
-          (lambda ()
-            (font-lock-mode)
-            (clojure-mode-font-lock-setup)
-            (font-lock-mode))))
+(let* ((modes       '(paredit-mode hl-sexp-mode subword-mode))
+       (all-hooks   '(clojure-mode-hook cider-mode-hook cider-repl-mode-hook))
+       (cider-hooks '(cider-mode-hook cider-repl-mode-hook)))
+  (dolist (hook all-hooks)
+    (dolist (mode modes)
+      (add-hook hook mode))
+    (add-hook hook (lambda () (hl-line-mode -1))))
+  (dolist (hook cider-hooks)
+    (add-hook hook
+              (lambda ()
+                (font-lock-mode)
+                (clojure-mode-font-lock-setup)
+                (font-lock-mode)))))
 
 ;; ===========================================================================
 ;; Scala
