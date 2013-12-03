@@ -54,6 +54,9 @@
                       ;; Haskell
                       haskell-mode
 
+                      ;; OCaml
+                      tuareg
+
                       ;; Python / Django
                       ein
                       jedi
@@ -219,6 +222,19 @@
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'pretty-mode)
+
+;; ===========================================================================
+;; OCaml
+;; ===========================================================================
+(dolist (var (car (read-from-string (shell-command-to-string
+                                     "opam config env --sexp"))))
+  (setenv (car var) (cadr var)))
+(setq exec-path (split-string (getenv "PATH") path-separator))
+(push (concat (getenv "OCAML_TOPLEVEL_PATH")
+              "/../../share/emacs/site-lisp") load-path)
+(autoload 'utop "utop" "Toplevel for OCaml" t)
+(autoload 'utop-setup-ocaml-buffer "utop" "Toplevel for Ocaml" t)
+(add-hook 'tuareg-mode-hook 'utop-setup-ocaml-buffer)
 
 ;; ===========================================================================
 ;; Server
