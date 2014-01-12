@@ -54,6 +54,9 @@
                       ;; Haskell
                       haskell-mode
 
+                      ;; Racket
+                      geiser
+
                       ;; Python / Django
                       ein
                       jedi
@@ -170,6 +173,12 @@
                 (font-lock-mode)
                 (clojure-mode-font-lock-setup)
                 (font-lock-mode)))))
+
+
+;; ===========================================================================
+;; Racket
+;; ===========================================================================
+(add-hook 'geiser-mode 'paredit-mode)
 
 ;; ===========================================================================
 ;; Scala
