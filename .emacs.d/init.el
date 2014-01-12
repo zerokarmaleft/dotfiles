@@ -161,8 +161,8 @@
 (setq cider-auto-select-error-buffer t)
 
 (let* ((modes       '(paredit-mode hl-sexp-mode subword-mode))
-       (all-hooks   '(clojure-mode-hook cider-mode-hook cider-repl-mode-hook))
-       (cider-hooks '(cider-mode-hook cider-repl-mode-hook)))
+       (cider-hooks '(cider-mode-hook cider-repl-mode-hook))
+       (all-hooks   (cons 'clojure-mode-hook cider-hooks)))
   (dolist (hook all-hooks)
     (dolist (mode modes)
       (add-hook hook mode))
