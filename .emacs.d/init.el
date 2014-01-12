@@ -213,11 +213,6 @@
           (lambda ()
             (rvm-activate-corresponding-ruby)))
 
-;; TODO hack to suppress warning
-(defalias 'inf-ruby-keys 'inf-ruby-setup-keybindings)
-
-(add-hook 'ruby-mode-hook 'pretty-mode)
-
 ;; ===========================================================================
 ;; Python
 ;; ===========================================================================
@@ -234,14 +229,12 @@
 (autoload 'jedi:setup "jedi" nil t)
 (add-hook 'python-mode-hook 'auto-complete-mode)
 (add-hook 'python-mode-hook 'jedi:setup)
-(add-hook 'python-mode-hook 'pretty-mode)
 
 ;; ===========================================================================
 ;; Haskell
 ;; ===========================================================================
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'pretty-mode)
 
 ;; ===========================================================================
 ;; Server
