@@ -1,4 +1,4 @@
 execute pathogen#infect()
 syntax on
 filetype plugin indent on
-colors zenburn
+colorscheme zenburn
