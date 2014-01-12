@@ -128,6 +128,20 @@
 (setq yas/load-directory "~/.emacs.d/vendor/snippets")
 
 ;; ===========================================================================
+;; Org
+;; ===========================================================================
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (clojure    . t)
+   (lisp       . t)
+   (ruby       . t)
+   (python     . t)
+   (java       . t)
+   (js         . t)
+   (R          . t)))
+
+;; ===========================================================================
 ;; C / C++ / Objective C / Java / C#
 ;; ===========================================================================
 (add-hook 'c-mode-common-hook 'google-set-c-style)
