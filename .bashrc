@@ -29,7 +29,7 @@ export HG_EDITOR="emacsclient -t"
 export CHROME_BIN=`which chromium-browser`
 export FIREFOX_BIN=`which firefox`
 
-export PLAY_VERSION="2.1.3"
+export PLAY_VERSION="2.2.1"
 export PLAY_PATH="$HOME/.bin/play-$PLAY_VERSION"
 
 export RVMPATH="$HOME/.rvm/bin"
