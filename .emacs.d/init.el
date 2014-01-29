@@ -93,10 +93,15 @@
   (exec-path-from-shell-initialize))
 
 ;; temporary files
-(setq backup-directory-alist
-      `((".*" . ,temporary-file-directory)))
-(setq auto-save-file-name-transform
-      `((".*" ,temporary-file-directory t)))
+(setq temporary-file-directory "/tmp/emacs")
+(setq
+ auto-save-file-name-transform `((".*" ,temporary-file-directory t))
+ backup-by-copying             t
+ backup-directory-alist        `((".*" . ,temporary-file-directory))
+ delete-old-versions           t
+ kept-new-versions             5
+ kept-old-versions             2
+ version-control               t)
 
 ;; ===========================================================================
 ;; General Settings
