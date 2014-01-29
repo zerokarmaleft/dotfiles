@@ -128,6 +128,7 @@
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'super)
 
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-c n")   'esk-cleanup-buffer)
 (global-set-key (kbd "C-c =")   'er/expand-region)
 (global-set-key (kbd "C-c a r") 'align-regexp)
