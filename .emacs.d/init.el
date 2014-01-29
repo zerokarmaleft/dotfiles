@@ -111,9 +111,16 @@
          (add-to-list 'default-frame-alist '(width . 80))))
 
 ;; ===========================================================================
-;; Color Theme
+;; Display Settings
 ;; ===========================================================================
 (require 'zenburn-theme)
+
+(defun toggle-transparency ()
+  (interactive)
+  (let ((param (cadr (frame-parameter nil 'alpha))))
+    (if (and param (/= param 100))
+        (set-frame-parameter nil 'alpha '(100 100))
+      (set-frame-parameter nil 'alpha '(85 50)))))
 
 ;; ===========================================================================
 ;; Keybindings
@@ -121,9 +128,10 @@
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'super)
 
-(global-set-key (kbd "C-c n") 'esk-cleanup-buffer)
-(global-set-key (kbd "C-c =") 'er/expand-region)
+(global-set-key (kbd "C-c n")   'esk-cleanup-buffer)
+(global-set-key (kbd "C-c =")   'er/expand-region)
 (global-set-key (kbd "C-c a r") 'align-regexp)
+(global-set-key (kbd "C-c t")   'toggle-transparency)
 
 ;; ===========================================================================
 ;; AutoComplete
