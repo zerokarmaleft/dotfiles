@@ -20,6 +20,10 @@
                       yasnippet
                       zenburn-theme
 
+                      ;; HTML / CSS
+                      rainbow-mode
+                      css-eldoc
+
                       ;; JavaScript
                       js2-mode
                       js2-refactor
@@ -146,6 +150,12 @@
 ;; ===========================================================================
 (add-hook 'c-mode-common-hook 'google-set-c-style)
 (add-hook 'c-mode-common-hook 'pretty-mode)
+
+;; ===========================================================================
+;; CSS
+;; ===========================================================================
+(add-hook 'css-mode-hook 'paredit-mode)
+(add-hook 'css-mode-hook 'rainbow-mode)
 
 ;; ===========================================================================
 ;; JavaScript
