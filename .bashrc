@@ -29,6 +29,8 @@ export HG_EDITOR="emacsclient -t"
 export CHROME_BIN=`which chromium-browser`
 export FIREFOX_BIN=`which firefox`
 
+export CABAL_PATH="$HOME/.cabal/bin"
+
 export PLAY_VERSION="2.2.1"
 export PLAY_PATH="$HOME/.bin/play-$PLAY_VERSION"
 
@@ -38,7 +40,7 @@ export DISTUTILSPATH="/usr/local/share/python"
 
 export LOCALNODEBIN_PATH="./node_modules/.bin"
 
-export PATH="$HOME/.bin:/usr/local/sbin:/usr/local/bin:$LOCALNODEBIN_PATH:$RVMPATH:$DISTUTILSPATH:$PLAY_PATH:$PATH"
+export PATH="$HOME/.bin:$CABAL_PATH:/usr/local/sbin:/usr/local/bin:$LOCALNODEBIN_PATH:$RVMPATH:$DISTUTILSPATH:$PLAY_PATH:$PATH"
 
 # load Python virtualenvwrapper
 export VIRTUALENVWRAPPER_PYTHON="$(brew --prefix)/bin/python3"
