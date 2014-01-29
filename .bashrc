@@ -42,8 +42,3 @@ export LOCALNODEBIN_PATH="./node_modules/.bin"
 
 export PATH="$HOME/.bin:$CABAL_PATH:/usr/local/sbin:/usr/local/bin:$LOCALNODEBIN_PATH:$RVMPATH:$DISTUTILSPATH:$PLAY_PATH:$PATH"
 
-# load Python virtualenvwrapper
-export VIRTUALENVWRAPPER_PYTHON="$(brew --prefix)/bin/python3"
-export WORKON_HOME="$HOME/.virtualenvs"
-. $(which virtualenvwrapper.sh)
-
