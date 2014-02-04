@@ -166,10 +166,12 @@
 (add-hook 'c-mode-common-hook 'pretty-mode)
 
 ;; ===========================================================================
-;; CSS
+;; CSS / Sass / SCSS
 ;; ===========================================================================
 (add-hook 'css-mode-hook 'paredit-mode)
 (add-hook 'css-mode-hook 'rainbow-mode)
+
+(setq scss-compile-at-save nil)
 
 ;; ===========================================================================
 ;; JavaScript
