@@ -226,6 +226,13 @@
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 (add-hook 'scala-mode-hook 'pretty-mode)
 
+(add-hook 'ensime-mode-hook
+          (lambda ()
+            (progn
+              (local-set-key (kbd "C-c C-v C-e d") 'ensime-inf-eval-definition)
+              (local-set-key (kbd "C-c C-v C-e r") 'ensime-inf-eval-region)
+              (local-set-key (kbd "C-c C-v C-e b") 'ensime-inf-eval-buffer))))
+
 (setq ensime-inf-cmd-template     '("sbt" "console" "-classpath" :classpath)
       ensime-inf-default-cmd-line '("sbt" "console"))
 
