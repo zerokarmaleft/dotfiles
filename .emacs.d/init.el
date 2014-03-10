@@ -269,8 +269,16 @@
 ;; ===========================================================================
 ;; Haskell
 ;; ===========================================================================
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+(setq shm-load-path
+      (concat vendor-base-load-path "/structured-haskell-mode/elisp"))
+(add-to-list 'load-path shm-load-path)
+(require 'shm)
+
+(add-hook 'haskell-mode-hook 'structured-haskell-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'pretty-mode)
+(add-hook 'haskell-mode-hook (lambda ()
+                               (hl-line-mode -1)))
 
 ;; ===========================================================================
 ;; Server
