@@ -93,6 +93,8 @@
 
 ;; temporary files
 (setq temporary-file-directory "/tmp/emacs")
+(when (not (file-exists-p temporary-file-directory))
+  (mkdir temporary-file-directory))
 (setq
  auto-save-file-name-transform `((".*" ,temporary-file-directory t))
  backup-by-copying             t
