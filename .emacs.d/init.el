@@ -116,6 +116,8 @@
 ;; Display Settings
 ;; ===========================================================================
 (require 'zenburn-theme)
+;; (require 'solarized-light-theme)
+;; (require 'solarized-dark-theme)
 
 (defun toggle-transparency ()
   (interactive)
