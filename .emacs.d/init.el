@@ -40,6 +40,7 @@
                       rvm
                       sass-mode
                       scss-mode
+                      slim-mode
                       yaml-mode
                       yari
 
@@ -245,7 +246,8 @@
 ;; use project-configured Ruby version
 (add-hook 'ruby-mode-hook
           (lambda ()
-            (rvm-activate-corresponding-ruby)))
+            (rvm-activate-corresponding-ruby)
+            (rinari-launch)))
 
 ;; ===========================================================================
 ;; Python
