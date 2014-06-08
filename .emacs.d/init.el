@@ -73,6 +73,9 @@
                       ;; Cucumber
                       feature-mode
 
+                      ;; LaTeX
+                      auctex
+
                       ;; Miscellaneous
                       cl-lib
                       graphviz-dot-mode
