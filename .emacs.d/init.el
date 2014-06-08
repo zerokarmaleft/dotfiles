@@ -60,6 +60,9 @@
                       haskell-mode
                       ghc
 
+                      ;; Idris
+                      idris-mode
+
                       ;; Racket
                       geiser
 
