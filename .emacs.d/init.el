@@ -58,6 +58,7 @@
 
                       ;; Haskell
                       haskell-mode
+                      ghc
 
                       ;; Racket
                       geiser
@@ -279,11 +280,11 @@
 (add-to-list 'load-path shm-load-path)
 (require 'shm)
 
+(add-hook 'haskell-mode-hook (lambda () (ghc-init)))
 (add-hook 'haskell-mode-hook 'structured-haskell-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'pretty-mode)
-(add-hook 'haskell-mode-hook (lambda ()
-                               (hl-line-mode -1)))
+(add-hook 'haskell-mode-hook (lambda () (hl-line-mode -1)))
 
 ;; ===========================================================================
 ;; Server
