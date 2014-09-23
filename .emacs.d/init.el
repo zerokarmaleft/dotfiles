@@ -3,87 +3,48 @@
 ;; ===========================================================================
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+             '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/") t)
 (package-initialize)
 
 (when (not package-archive-contents)
   (package-refresh-contents))
 
 (defvar my-packages '(;; Core
-                      starter-kit
-                      starter-kit-bindings
-                      starter-kit-eshell
-                      starter-kit-lisp
-                      starter-kit-ruby
-                      auto-complete
+                      company
                       exec-path-from-shell
+		      ido-ubiquitous
+		      paredit
+		      smex
                       yasnippet
                       zenburn-theme
 
-                      ;; HTML / CSS
-                      rainbow-mode
-                      css-eldoc
-
                       ;; JavaScript
-                      js2-mode
-                      js2-refactor
-                      ac-js2
+                      tern
+                      company-tern
                       coffee-mode
-
-                      ;; Ruby / Rails
-                      bundler
-                      enh-ruby-mode
-                      haml-mode
-                      rinari
-                      rspec-mode
-                      ruby-tools
-                      rvm
-                      sass-mode
-                      scss-mode
-                      slim-mode
-                      yaml-mode
-                      yari
 
                       ;; Clojure
                       clojure-mode
-                      clojure-test-mode
                       hl-sexp
                       cider
-                      ac-nrepl
-                      slamhound
-
-                      ;; Scala
-                      scala-mode2
-                      ensime
 
                       ;; Haskell
                       haskell-mode
                       ghc
-
-                      ;; Idris
-                      idris-mode
+                      shm
+                      company-ghc
 
                       ;; Racket
                       geiser
 
-                      ;; Python / Django
-                      ein
-                      jedi
-                      epc
-
-                      ;; R
-                      ess
-
-                      ;; Cucumber
-                      feature-mode
-
                       ;; LaTeX
                       auctex
 
+		      ;; Markdown
+		      markdown-mode
+
                       ;; Miscellaneous
-                      cl-lib
-                      graphviz-dot-mode
-                      lorem-ipsum
+		      expand-region
                       pretty-mode))
 
 (dolist (package my-packages)
@@ -115,9 +76,75 @@
 ;; ===========================================================================
 ;; General Settings
 ;; ===========================================================================
+(setq inhibit-startup-screen t)
+(setq initial-scratch-message
+"\"If the old fairy-tale ending \'They lived happily ever after\' is taken
+to mean \'They felt for the next fifty years exactly as they felt the
+day before they were married,' then it says what probably never was
+nor ever would be true, and would be highly undesirable if it were.
+Who could bear to live in that excitement for even five years? What
+would become of your work, your appetite, your sleep, your
+friendships? But, of course, ceasing to be \'in love\' need not mean
+ceasing to love.
+
+Love in this second sense-love as distinct from \'being in love\'—is not
+merely a feeling. It is a deep unity, maintained by the will and
+deliberately strengthened by habit; reinforced by (in Christian
+marriages the grace which both partners ask, and receive, from God.)
+
+They can have this love for each other even at those moments when they
+do not like each other; as you love yourself even when you do not like
+yourself.
+
+They can retain this love even when each would easily, if they allowed
+themselves, be \'in love\' with someone else. \'Being in love' first
+moved them to promise fidelity: this quieter love enables them to keep
+the promise. It is on this love that the engine of marriage is run:
+being in love was the explosion that started it.\"
+
+;; C.S. Lewis
+
+(setq vows-to-laura
+      '((I promise to be transparent in everything I say and everything I do.)
+        (I promise to find new and creative ways to fulfill your needs and
+           express my love for you everyday.)
+        (I promise to always aspire to new goals together with you, and
+           consistently act to progress toward those goals.)
+        (I promise to cultivate our relationship to grow in all directions, to
+           fill the spaces that are empty in order to strengthen the bond
+           between us.)
+        (I promise to always heed your counsel and maintain an open atmosphere
+           of accountability.)))
+
+(setq vows-to-kids
+      '((We promise to be your advocates. We will stand up for you.)
+        (We promise to provide a peaceful, caring home.)
+        (We promise to give you room to grow. We will celebrate your successes
+            with you and extend grace to learn by failure.)
+        (We promise to \'train you up in the way you should go, so that when you
+            are old you do not depart from it.\')
+        (We promise that as our family grows and changes, our love for you and
+            our commitment to you will grow as well.)))
+")
+
 (when (memq window-system '(mac ns))
   (progn (add-to-list 'default-frame-alist '(height . 82))
          (add-to-list 'default-frame-alist '(width . 80))))
+
+(ido-mode t)
+(setq ido-enable-flex-matching t)
+
+(menu-bar-mode -1)
+(when (fboundp 'tool-bar-mode)
+  (tool-bar-mode -1))
+(when (fboundp 'scroll-bar-mode)
+  (scroll-bar-mode -1))
+
+(global-hl-sexp-mode)
+
+(setq-default indent-tabs-mode nil)
+
+(add-hook 'after-init-hook 'global-company-mode)
 
 ;; ===========================================================================
 ;; Display Settings
@@ -139,17 +166,22 @@
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'super)
 
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-(global-set-key (kbd "C-c n")   'esk-cleanup-buffer)
-(global-set-key (kbd "C-c =")   'er/expand-region)
-(global-set-key (kbd "C-c a r") 'align-regexp)
-(global-set-key (kbd "C-c t")   'toggle-transparency)
+(global-set-key (kbd "C-s")         'isearch-forward-regexp)
+(global-set-key (kbd "C-r")         'isearch-backward-regexp)
+(global-set-key (kbd "C-M-s")       'isearch-forward)
+(global-set-key (kbd "C-M-r")       'isearch-backward)
+(global-set-key (kbd "M-x")         'smex)
+(global-set-key (kbd "M-X")         'smex-major-mode-commands)
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+(global-set-key (kbd "C-x C-b")     'ibuffer)
+(global-set-key (kbd "C-c q")       'join-line)
+(global-set-key (kbd "C-=")         'er/expand-region)
+(global-set-key (kbd "C-c a r")     'align-regexp)
+(global-set-key (kbd "C-c t")       'toggle-transparency)
 
 ;; ===========================================================================
-;; AutoComplete
+;; Company
 ;; ===========================================================================
-;; (require 'auto-complete-config)
-;; (ac-config-default)
 
 ;; ===========================================================================
 ;; yasnippet
@@ -179,18 +211,30 @@
 ;; ===========================================================================
 ;; CSS / Sass / SCSS
 ;; ===========================================================================
-(add-hook 'css-mode-hook 'paredit-mode)
-(add-hook 'css-mode-hook 'rainbow-mode)
-
-(setq scss-compile-at-save nil)
 
 ;; ===========================================================================
 ;; JavaScript
 ;; ===========================================================================
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
-(customize-set-variable 'js2-basic-offset 2)
-(add-hook 'js2-mode-hook 'pretty-mode)
+(setq js-indent-level 2)
+(add-hook 'js-mode-hook (lambda () (tern-mode t)))
+(add-hook 'js-mode-hook (lambda ()
+                          (company-mode t)
+                          (set (make-local-variable 'company-backends)
+                               '(company-tern))))
+(add-hook 'js-mode-hook 
+          (lambda ()
+            (set (make-local-variable 'paredit-space-for-delimiter-predicates)
+                 '((lambda (endp delimiter) nil)))
+            (paredit-mode 1)))
+(add-hook 'js-mode-hook (lambda ()
+                          (local-set-key (kbd "{") #'paredit-open-curly)
+                          (local-set-key (kbd "}") #'paredit-close-curly)))
+
+;; ===========================================================================
+;; Elisp
+;; ===========================================================================
+(add-hook 'emacs-lisp-mode-hook 'paredit-mode)
+(add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
 
 ;; ===========================================================================
 ;; Common Lisp / SLIME
@@ -204,6 +248,7 @@
   (setq inferior-lisp-program "clisp")
   (slime))
 
+(add-hook 'lisp-mode-hook 'paredit-mode)
 (add-hook 'lisp-mode-hook 'pretty-mode)
 
 ;; ===========================================================================
@@ -212,96 +257,50 @@
 (setq nrepl-hide-special-buffers t)
 (setq cider-auto-select-error-buffer t)
 
-(defun define-om-indents ()
-  (define-clojure-indent
-    (a 0)
-    (b 0)
-    (blockquote 0)
-    (body 0)
-    (button 0)
-    (canvas 0)
-    (caption 0)
-    (cite 0)
-    (code 0)
-    (div 0)
-    (dl 0)
-    (dt 0)
-    (fieldset 0)
-    (footer 0)
-    (form 0)
-    (go-loop 0)
-    (h0 0)
-    (h2 0)
-    (h3 0)
-    (h4 0)
-    (h5 0)
-    (h6 0)
-    (head 0)
-    (header 0)
-    (hr 0)
-    (html 0)
-    (i 0)
-    (iframe 0)
-    (img 0)
-    (input 0)
-    (label 0)
-    (legend 0)
-    (li 0)
-    (link 0)
-    (meta 0)
-    (nav 0)
-    (ol 0)
-    (optgroup 0)
-    (p 0)
-    (pre 0)
-    (root 0)
-    (script 0)
-    (section 0)
-    (select 0)
-    (small 0)
-    (span 0)
-    (strong 0)
-    (style 0)
-    (table 0)
-    (tbody 0)
-    (td 0)
-    (tfoot 0)
-    (th 0)
-    (thead 0)
-    (title 0)
-    (tr 0)
-    (text 0)
-    (u 0)
-    (ul 0)
-    (video 0)
-
-    (svg 0)))
-
 (let* ((modes       '(paredit-mode hl-sexp-mode subword-mode))
        (cider-hooks '(cider-mode-hook cider-repl-mode-hook))
        (all-hooks   (cons 'clojure-mode-hook cider-hooks)))
   (dolist (hook all-hooks)
     (dolist (mode modes)
       (add-hook hook mode))
-    (add-hook hook (lambda () (hl-line-mode -1)))
-    (add-hook hook 'define-om-indents))
-  (dolist (hook cider-hooks)
-    (add-hook hook
-              (lambda ()
-                (font-lock-mode)
-                (clojure-mode-font-lock-setup)
-                (font-lock-mode)))))
+    (add-hook hook (lambda () (hl-line-mode -1)))))
+
+(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
 
 ;; ===========================================================================
 ;; Racket
 ;; ===========================================================================
-(add-hook 'geiser-mode 'paredit-mode)
+
+;; ===========================================================================
+;; Erlang
+;; ===========================================================================
+(let* ((erlang-version "17.1_1")
+
+       (erlang-path      
+	(concat "/usr/local/Cellar/erlang/" erlang-version))
+
+       (erlang-load-path 
+	(concat erlang-path "/lib/erlang/lib/tools-2.6.15/emacs")))
+
+  (add-to-list 'load-path erlang-load-path))
+(require 'erlang-start)
+
+(setq erlang-indent-level      2)
+(setq erlang-electric-commands '(erlang-electric-semicolon))
 
 ;; ===========================================================================
 ;; Scala
 ;; ===========================================================================
+(setq scala-mode2-load-path
+      (concat vendor-base-load-path "/scala-mode2"))
+(add-to-list 'load-path scala-mode2-load-path)
+(setq ensime-load-path
+      (concat vendor-base-load-path "/ensime"))
+(add-to-list 'load-path ensime-load-path)
+(require 'scala-mode2)
+(require 'ensime)
+
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
-(add-hook 'scala-mode-hook 'pretty-mode)
 
 (add-hook 'ensime-mode-hook
           (lambda ()
@@ -316,30 +315,30 @@
 ;; ===========================================================================
 ;; Ruby
 ;; ===========================================================================
-(rvm-activate-corresponding-ruby)
+;; (rvm-activate-corresponding-ruby)
 
 ;; use project-configured Ruby version
-(add-hook 'ruby-mode-hook
-          (lambda ()
-            (rvm-activate-corresponding-ruby)
-            (rinari-launch)))
+;; (add-hook 'ruby-mode-hook
+;;           (lambda ()
+;;             (rvm-activate-corresponding-ruby)
+;;             (rinari-launch)))
 
 ;; ===========================================================================
 ;; Python
 ;; ===========================================================================
-(setq python-shell-interpreter      "ipython"
-      python-shell-interpreter-args ""
-      python-shell-prompt-regexp    "In \\[[0-9]+\\]:"
-      python-shell-completion-setup-code
-      "from IPython.core.completerlib import module_completion"
-      python-shell-completion-module-string-code
-      "';'.join(module_completion('''%s'''))\n"
-      python-shell-completion-string-code
-      "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
+;; (setq python-shell-interpreter      "ipython"
+;;       python-shell-interpreter-args ""
+;;       python-shell-prompt-regexp    "In \\[[0-9]+\\]:"
+;;       python-shell-completion-setup-code
+;;       "from IPython.core.completerlib import module_completion"
+;;       python-shell-completion-module-string-code
+;;       "';'.join(module_completion('''%s'''))\n"
+;;       python-shell-completion-string-code
+;;       "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
 
-(autoload 'jedi:setup "jedi" nil t)
-(add-hook 'python-mode-hook 'auto-complete-mode)
-(add-hook 'python-mode-hook 'jedi:setup)
+;; (autoload 'jedi:setup "jedi" nil t)
+;; (add-hook 'python-mode-hook 'auto-complete-mode)
+;; (add-hook 'python-mode-hook 'jedi:setup)
 
 ;; ===========================================================================
 ;; Haskell
@@ -354,6 +353,16 @@
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'pretty-mode)
 (add-hook 'haskell-mode-hook (lambda () (hl-line-mode -1)))
+(add-hook 'haskell-mode-hook 'company-mode)
+
+(add-hook 'ghc-mod (lambda ()
+                     (add-to-list 'company-backends 'company-ghc)))
+
+;; ===========================================================================
+;; Coq
+;; ===========================================================================
+;; (setq auto-mode-alist (cons '("\\.v$" . coq-mode) auto-mode-alist))
+;; (autoload 'coq-mode "coq" "Major mode for editing Coq vernacular." t)
 
 ;; ===========================================================================
 ;; Server
