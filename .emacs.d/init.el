@@ -91,7 +91,7 @@
 ;; ===========================================================================
 (setq inhibit-startup-screen t)
 (setq initial-scratch-message
-"\"If the old fairy-tale ending \'They lived happily ever after\' is taken
+      "\"If the old fairy-tale ending \'They lived happily ever after\' is taken
 to mean \'They felt for the next fifty years exactly as they felt the
 day before they were married,' then it says what probably never was
 nor ever would be true, and would be highly undesirable if it were.
