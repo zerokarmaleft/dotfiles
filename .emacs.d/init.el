@@ -210,7 +210,7 @@ being in love was the explosion that started it.\"
 (global-set-key (kbd "C-c q")       'join-line)
 (global-set-key (kbd "C-=")         'er/expand-region)
 (global-set-key (kbd "C-c a r")     'align-regexp)
-(global-set-key (kbd "C-c C-c b")   'cleanup-buffer)
+(global-set-key (kbd "C-c C-n b")   'cleanup-buffer)
 (global-set-key (kbd "C-c t")       'toggle-transparency)
 
 ;; ===========================================================================
