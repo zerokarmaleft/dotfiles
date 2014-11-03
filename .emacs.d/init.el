@@ -174,6 +174,24 @@ being in love was the explosion that started it.\"
       (set-frame-parameter nil 'alpha '(85 50)))))
 
 ;; ===========================================================================
+;; Utilities
+;; ===========================================================================
+
+(defun untabify-buffer ()
+  (interactive)
+  (untabify (point-min) (point-max)))
+
+(defun indent-buffer ()
+  (interactive)
+  (indent-region (point-min) (point-max)))
+
+(defun cleanup-buffer ()
+  (interactive)
+  (indent-buffer)
+  (untabify-buffer)
+  (delete-trailing-whitespace))
+
+;; ===========================================================================
 ;; Keybindings
 ;; ===========================================================================
 (setq mac-command-modifier 'meta)
@@ -190,6 +208,7 @@ being in love was the explosion that started it.\"
 (global-set-key (kbd "C-c q")       'join-line)
 (global-set-key (kbd "C-=")         'er/expand-region)
 (global-set-key (kbd "C-c a r")     'align-regexp)
+(global-set-key (kbd "C-c C-c b")   'cleanup-buffer)
 (global-set-key (kbd "C-c t")       'toggle-transparency)
 
 ;; ===========================================================================
