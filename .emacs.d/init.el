@@ -247,20 +247,23 @@ being in love was the explosion that started it.\"
 ;; ===========================================================================
 ;; JavaScript
 ;; ===========================================================================
-(setq js-indent-level 2)
-(add-hook 'js-mode-hook (lambda () (tern-mode t)))
-(add-hook 'js-mode-hook (lambda ()
-                          (company-mode t)
-                          (set (make-local-variable 'company-backends)
-                               '(company-tern))))
-(add-hook 'js-mode-hook 
+(add-hook 'inferior-js-mode-hook 'ansi-color-for-comint-mode-on)
+(add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
+(add-to-list 'comint-preoutput-filter-functions
+             (lambda (output)
+               (replace-regexp-in-string "\033\\[[0-9]+[GJK]" "" output)))
+
+(add-hook 'js2-mode-hook
           (lambda ()
-            (set (make-local-variable 'paredit-space-for-delimiter-predicates)
-                 '((lambda (endp delimiter) nil)))
-            (paredit-mode 1)))
-(add-hook 'js-mode-hook (lambda ()
-                          (local-set-key (kbd "{") #'paredit-open-curly)
-                          (local-set-key (kbd "}") #'paredit-close-curly)))
+            (smartparens-mode)
+            (pretty-mode)
+            (local-set-key (kbd "C-x C-e") 'js-send-last-sexp)
+            (local-set-key (kbd "C-M-x")   'js-send-last-sexp-and-go)
+            (local-set-key (kbd "C-c b")   'js-send-buffer-and-go)
+            (local-set-key (kbd "C-c l")   'js-load-file-and-go)))
+
+(custom-set-variables
+ '(js2-basic-offset 2))
 
 ;; ===========================================================================
 ;; Elisp
