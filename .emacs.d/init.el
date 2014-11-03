@@ -292,7 +292,7 @@ being in love was the explosion that started it.\"
 (setq nrepl-hide-special-buffers t)
 (setq cider-auto-select-error-buffer t)
 
-(let* ((modes       '(paredit-mode hl-sexp-mode subword-mode))
+(let* ((modes       '(paredit-mode show-paren-mode hl-sexp-mode subword-mode))
        (cider-hooks '(cider-mode-hook cider-repl-mode-hook))
        (all-hooks   (cons 'clojure-mode-hook cider-hooks)))
   (dolist (hook all-hooks)
