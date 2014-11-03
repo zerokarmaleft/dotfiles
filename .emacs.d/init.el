@@ -309,34 +309,21 @@ being in love was the explosion that started it.\"
 ;; ===========================================================================
 
 ;; ===========================================================================
-;; Erlang
+;; Haskell
 ;; ===========================================================================
-(let* ((erlang-version "17.1_1")
+(add-hook 'haskell-mode-hook (lambda () (ghc-init)))
+(add-hook 'haskell-mode-hook 'structured-haskell-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'pretty-mode)
+(add-hook 'haskell-mode-hook (lambda () (hl-line-mode -1)))
+(add-hook 'haskell-mode-hook 'company-mode)
 
-       (erlang-path      
-	(concat "/usr/local/Cellar/erlang/" erlang-version))
-
-       (erlang-load-path 
-	(concat erlang-path "/lib/erlang/lib/tools-2.6.15/emacs")))
-
-  (add-to-list 'load-path erlang-load-path))
-(require 'erlang-start)
-
-(setq erlang-indent-level      2)
-(setq erlang-electric-commands '(erlang-electric-semicolon))
+(add-hook 'ghc-mod (lambda ()
+                     (add-to-list 'company-backends 'company-ghc)))
 
 ;; ===========================================================================
 ;; Scala
 ;; ===========================================================================
-(setq scala-mode2-load-path
-      (concat vendor-base-load-path "/scala-mode2"))
-(add-to-list 'load-path scala-mode2-load-path)
-(setq ensime-load-path
-      (concat vendor-base-load-path "/ensime"))
-(add-to-list 'load-path ensime-load-path)
-(require 'scala-mode2)
-(require 'ensime)
-
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 
 (add-hook 'ensime-mode-hook
@@ -378,28 +365,19 @@ being in love was the explosion that started it.\"
 ;; (add-hook 'python-mode-hook 'jedi:setup)
 
 ;; ===========================================================================
-;; Haskell
+;; Erlang
 ;; ===========================================================================
-(setq shm-load-path
-      (concat vendor-base-load-path "/structured-haskell-mode/elisp"))
-(add-to-list 'load-path shm-load-path)
-(require 'shm)
-
-(add-hook 'haskell-mode-hook (lambda () (ghc-init)))
-(add-hook 'haskell-mode-hook 'structured-haskell-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'pretty-mode)
-(add-hook 'haskell-mode-hook (lambda () (hl-line-mode -1)))
-(add-hook 'haskell-mode-hook 'company-mode)
-
-(add-hook 'ghc-mod (lambda ()
-                     (add-to-list 'company-backends 'company-ghc)))
+(setq
+ erlang-indent-level      2
+ erlang-electric-commands '(erlang-electric-semicolon))
 
 ;; ===========================================================================
-;; Coq
+;; Go
 ;; ===========================================================================
-;; (setq auto-mode-alist (cons '("\\.v$" . coq-mode) auto-mode-alist))
-;; (autoload 'coq-mode "coq" "Major mode for editing Coq vernacular." t)
+(add-hook 'go-mode-hook
+          (lambda ()
+            (setq tab-width 2
+                  standard-indent 2)))
 
 ;; ===========================================================================
 ;; Server
