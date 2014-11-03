@@ -3,18 +3,19 @@
 ;; ===========================================================================
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/") t)
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
 
 (when (not package-archive-contents)
   (package-refresh-contents))
 
 (defvar my-packages '(;; Core
+                      auto-complete
                       company
                       exec-path-from-shell
-		      ido-ubiquitous
-		      paredit
-		      smex
+                      ido-ubiquitous
+                      paredit
+                      smex
                       yasnippet
                       zenburn-theme
 
@@ -22,6 +23,7 @@
                       tern
                       company-tern
                       coffee-mode
+                      js-comint
 
                       ;; Clojure
                       clojure-mode
@@ -34,17 +36,28 @@
                       shm
                       company-ghc
 
+                      ;; OCaml
+                      tuareg
+
+                      ;; Scala
+                      scala-mode2
+                      ensime
+
                       ;; Racket
                       geiser
+
+                      ;; Go
+                      go-mode
+                      go-autocomplete
 
                       ;; LaTeX
                       auctex
 
-		      ;; Markdown
-		      markdown-mode
+                      ;; Markdown
+                      markdown-mode
 
                       ;; Miscellaneous
-		      expand-region
+                      expand-region
                       pretty-mode))
 
 (dolist (package my-packages)
