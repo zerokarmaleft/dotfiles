@@ -20,8 +20,7 @@
                       zenburn-theme
 
                       ;; JavaScript
-                      tern
-                      company-tern
+                      js2-mode
                       coffee-mode
                       js-comint
 
@@ -29,6 +28,9 @@
                       clojure-mode
                       hl-sexp
                       cider
+
+                      ;; Racket
+                      geiser
 
                       ;; Haskell
                       haskell-mode
@@ -43,8 +45,8 @@
                       scala-mode2
                       ensime
 
-                      ;; Racket
-                      geiser
+                      ;; Erlang
+                      erlang
 
                       ;; Go
                       go-mode
